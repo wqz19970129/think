@@ -1,0 +1,64 @@
+{extend name="public/base" /}
+
+{block name="body"}
+	<div class="main-title">
+
+	</div>
+	<form action="{:url()}" method="post" class="form-horizontal">
+		<div class="form-item">
+			<label class="item-label">报修标题<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">报修人<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="name" value="{$info.name|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">电话<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="tel" value="{$info.tel|default=''}">
+			</div>
+		</div>
+		<!--<div class="form-item">
+			<label class="item-label">保修时间<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="date" class="text input-large" name="create_time" value="{$info.create_time|default=''}"><br>
+				<input type="time" class="text input-large" name="his" value="{$info.his|default=''}">
+			</div>
+		</div>-->
+		<div class="form-item">
+			<label class="item-label">地址<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="address" value="{$info.address|default=''}">
+			</div>
+		</div>
+		<!-- 加载编辑器的容器 -->
+		<label class="item-label">内容<span class="check-tips"></span></label>
+		<script id="container" name="content" type="text/plain">
+   {$info.content|default=''}
+    </script>
+		<!-- 配置文件 -->
+		<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+		<!-- 编辑器源码文件 -->
+		<script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+		<!-- 实例化编辑器 -->
+		<script type="text/javascript">
+            var ue = UE.getEditor('container');
+		</script>
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<button class="btn submit-btn ajax-posts" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+{/block}
+{block name="script"}
+<script type="text/javascript" charset="utf-8">
+	//导航高亮
+	highlight_subnav('{:url('index')}');
+</script>
+{/block}
