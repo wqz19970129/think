@@ -102,6 +102,7 @@
             <th>电话</th>
             <th>报修时间</th>
             <th>地址</th>
+            <th>是否处理</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -114,10 +115,12 @@
             <td>{$guarantee.title}</td>
             <td>{$guarantee.name}</td>
             <td>{$guarantee.tel}</td>
-            <td>{$guarantee.create_time|date="Y-m-d H:i:s",###}</td>
+            <td>{$guarantee.create_time}</td>
             <td>{$guarantee.address}</td>
+            <td>{$guarantee.status?'已处理':'未处理'}</td>
             <td>
                 <a title="编辑" href="{:url('edit?id='.$guarantee['id'].'&pid='.$pid)}">编辑</a>
+                <a title="处理" href="{:url('update?id='.$guarantee['id'])}">处理</a>
                 <a class="confirm ajax-get" title="删除" href="{:url('del?id='.$guarantee['id'])}">删除</a>
             </td>
         </tr>
@@ -127,7 +130,15 @@
         {/notempty}
         </tbody>
     </table>
+    <ul class="pagination">
+        <li><a href="?page=1">&laquo;</a></li>
+        <li><a href="?page=1">1</a></li>
+        <li class="active"><span>2</span></li>
+        <li class="disabled"><span>&raquo;</span></li>
+    </ul>
 </div>
+<!-- Bootstrap -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 {/block}
 
 {block name="script"}

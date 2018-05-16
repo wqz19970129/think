@@ -15,10 +15,11 @@ class Guarantee extends Admin
 {
        public function index(){
            //$list = \think\Db::name('guarantee')->select();
-           $list=Db::table('twothink_guarantee')->select();
+           $list=Db::table('twothink_guarantee')->paginate(5);
+           //var_dump($list);die;
            $this->assign('list', $list);
            $this->assign('meta_title' , '导航管理');
-           return $this->fetch();
+           return $this->fetch('index');
        }
     public function add(){
         if(request()->isPost()){
@@ -83,10 +84,15 @@ class Guarantee extends Admin
         $map = array('id' => array('in', $id) );
         if(\think\Db::name('guarantee')->where($map)->delete()){
             //记录行为
-            action_log('update_guarantee', 'channel', $id, UID);
+            action_log('update_guarantee', 'guarantee', $id, UID);
             $this->success('删除成功');
         } else {
             $this->error('删除失败！');
         }
+    }
+    public function update($id){
+        //var_dump($id);die;
+        Db::table('twothink_guarantee')->where('id', $id)->update(['status' =>1]);
+        $this->success('修改成功', url('index'));
     }
 }

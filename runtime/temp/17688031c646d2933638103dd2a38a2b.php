@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"E:\www\think\public/../application/admin/view/default/guarantee\index.html";i:1526201233;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"E:\www\think\public/../application/admin/view/default/guarantee\index.html";i:1526440341;}*/ ?>
 <head>
     <meta charset="UTF-8">
     <title>报修列表|TwoThink管理平台</title>
@@ -103,6 +103,7 @@
             <th>电话</th>
             <th>报修时间</th>
             <th>地址</th>
+            <th>是否处理</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -114,10 +115,12 @@
             <td><?php echo $guarantee['title']; ?></td>
             <td><?php echo $guarantee['name']; ?></td>
             <td><?php echo $guarantee['tel']; ?></td>
-            <td><?php echo date("Y-m-d H:i:s",$guarantee['create_time']); ?></td>
+            <td><?php echo $guarantee['create_time']; ?></td>
             <td><?php echo $guarantee['address']; ?></td>
+            <td><?php echo !empty($guarantee['status'])?'已处理':'未处理'; ?></td>
             <td>
                 <a title="编辑" href="<?php echo url('edit?id='.$guarantee['id'].'&pid='.$pid); ?>">编辑</a>
+                <a title="处理" href="<?php echo url('update?id='.$guarantee['id']); ?>">处理</a>
                 <a class="confirm ajax-get" title="删除" href="<?php echo url('del?id='.$guarantee['id']); ?>">删除</a>
             </td>
         </tr>
@@ -126,7 +129,15 @@
         <?php endif; ?>
         </tbody>
     </table>
+    <ul class="pagination">
+        <li><a href="?page=1">&laquo;</a></li>
+        <li><a href="?page=1">1</a></li>
+        <li class="active"><span>2</span></li>
+        <li class="disabled"><span>&raquo;</span></li>
+    </ul>
 </div>
+<!-- Bootstrap -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 
 
 
